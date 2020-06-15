@@ -31,13 +31,14 @@ class SocialDistancing:
         self.imW, self.imH = int(self.resW), int(self.resH)
 
         self.x_dist_thresh = 400
-        self.dist_thres = 35
+        self.dist_thres = 30
 
         # Initialize video stream
-        self.videostream = cv2.VideoCapture("../video/output.avi")
+        self.videostream = cv2.VideoCapture("../video/vid_short.mp4")
         ret = self.videostream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
         ret = self.videostream.set(3, self.imW)
         ret = self.videostream.set(4, self.imH)
+        ret = self.videostream.set(cv2.CAP_PROP_FPS, 10)
 
         # Initialize frame rate calculation
         self.frame_rate_calc = 1
@@ -49,12 +50,16 @@ class SocialDistancing:
         self.outputQueues = []
 
         # parallel points
-        self.pts = np.array([(8, 178), (246, 81), (627, 147),  (540, 393)], dtype="float32")
+        # self.pts = np.array([(8, 178), (246, 81), (627, 147),  (540, 393)], dtype="float32")
+        # for vid_short
+        self.pts = np.array([(63, 217), (333, 23), (608, 77), (552, 356)], dtype="float32")
+        # self.pts = np.array([(137, 256), (360, 95), (480, 132), (319, 337)], dtype="float32")
         self.first_frame = True
+        # Destination points
         self.dst = np.array([[248, 409], [380, 409], [380, 541], [248, 541]], dtype="float32")
 
         # skip frames
-        self.num_frames = num_frames
+        self.num_frames = int(num_frames)
 
         self.network = model(model_name)
 
@@ -90,7 +95,7 @@ class SocialDistancing:
                 Mat_inv = cv2.getPerspectiveTransform(self.dst, self.pts)
                 self.first_frame = False
 
-            if (len(self.inputQueues) == 0) or (count == 60):
+            if (len(self.inputQueues) == 0) or (count == self.num_frames):
                 self.outputQueues = []
                 self.inputQueues = []
                 count = 0
@@ -99,12 +104,13 @@ class SocialDistancing:
                 scores, classes, boxes = self.network.detect(frame)
 
                 # for tracking
-                self.inputQueues, self.outputQueues, frame, bottom_cord = display_bbox(frame, self.inputQueues, self.outputQueues, rgb,
+                self.inputQueues, self.outputQueues, frame, bottom_cord, flag = display_bbox(frame, self.inputQueues, self.outputQueues, rgb,
                                                                 self.x_dist_thresh, scores, classes,
                                                                 self.min_conf_threshold,
                                                                 boxes, self.imH, self.imW, multi=True)
+                if not flag:
+                    continue
                 # warped = cv2.warpPerspective(frame, Mat, (1200, 900))
-
                 bottom_cord_warped = cv2.perspectiveTransform(bottom_cord, Mat)
                 bottom_cord_warped = np.round(bottom_cord_warped)
                 # for i in bottom_cord_warped[0]:
@@ -117,8 +123,10 @@ class SocialDistancing:
             # otherwise, we've already performed detection so let's track
             # multiple objects
             else:
-                self.inputQueues, self.outputQueues, frame, bottom_cord = display_bbox(frame, self.inputQueues, self.outputQueues, rgb,
+                self.inputQueues, self.outputQueues, frame, bottom_cord, flag = display_bbox(frame, self.inputQueues, self.outputQueues, rgb,
                                                                 self.x_dist_thresh, multi=False)
+                if not flag:
+                    continue
                 # warped = cv2.warpPerspective(frame, Mat, (1200, 900))
                 bottom_cord_warped = cv2.perspectiveTransform(bottom_cord, Mat)
                 bottom_cord_warped = np.round(bottom_cord_warped)

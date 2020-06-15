@@ -30,6 +30,7 @@ def display_bbox(frame, inputQueues, outputQueues, rgb,
     :return: inputQueues, outputQueues, frame, np.array([bottom_cord], np.float32)
     """
     bottom_cord = []
+    flag = True
     if multi:
 
         # Loop over all detections and draw detection box if confidence is above minimum threshold
@@ -71,7 +72,6 @@ def display_bbox(frame, inputQueues, outputQueues, rgb,
 
                 cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (10, 255, 0), 2)
 
-
     else:
         for iq in inputQueues:
             iq.put(rgb)
@@ -96,8 +96,10 @@ def display_bbox(frame, inputQueues, outputQueues, rgb,
             # draw the bounding box from the correlation object
             # tracker
             cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (10, 255, 0), 2)
+    if len(bottom_cord) == 0:
+        flag = False
 
-    return inputQueues, outputQueues, frame, np.array([bottom_cord], np.float32)
+    return inputQueues, outputQueues, frame, np.array([bottom_cord], np.float32), flag
 
 
 def four_point_transform(image, pts):
