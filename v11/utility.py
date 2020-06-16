@@ -162,7 +162,7 @@ def distance_violation(bottom_cord_warped, d_thresh, Mat_inv):
     dist_condensed = pdist(p)
     dist = squareform(dist_condensed)
 
-    dd = np.where(dist < d_thresh * 6 / 10)
+    dd = np.where(dist < d_thresh )#* 6 / 10
     close_p = []
     for i in range(int(np.ceil(len(dd[0]) / 2))):
         if dd[0][i] != dd[1][i]:

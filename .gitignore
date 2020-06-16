@@ -1,5 +1,10 @@
 venv
-video
+video/output.avi
+video/output_full.avi
+video/towncentre.mp4
 test
 venv2
-v11
+v11/ssd_mobilenet_v1_coco_2018_01_28
+v11/ssd_mobilenet_v1_fpn_shared_box_predictor_640x640_coco14_sync_2018_07_03
+v11/ssd_mobilenet_v3_small_coco_2020_01_14
+v11/faster_rcnn_resnet50_coco_2018_01_28

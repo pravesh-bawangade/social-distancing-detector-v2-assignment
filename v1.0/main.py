@@ -42,7 +42,7 @@ class SocialDistancing:
         self.dist_thres = 30
 
         # Initialize video stream
-        self.videostream = cv2.VideoCapture("../video/output.avi")
+        self.videostream = cv2.VideoCapture("../video/output.mp4")
         ret = self.videostream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
         ret = self.videostream.set(3, self.imW)
         ret = self.videostream.set(4, self.imH)

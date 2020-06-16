@@ -30,8 +30,8 @@ class SocialDistancing:
         self.resW, self.resH = resolution.split('x')
         self.imW, self.imH = int(self.resW), int(self.resH)
 
-        self.x_dist_thresh = 400
-        self.dist_thres = 30
+        self.x_dist_thresh = 200
+        self.dist_thres = 20
 
         # Initialize video stream
         self.videostream = cv2.VideoCapture("../video/vid_short.mp4")
