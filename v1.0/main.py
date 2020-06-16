@@ -1,6 +1,6 @@
-# python main.py --prototxt mobilenet_ssd/MobileNetSSD_deploy.prototxt
-
-# import the necessary packages
+"""
+@usage: python main.py --modeldir coco_ssd_mobilenet_v1_1
+"""
 from imutils.video import FPS
 import argparse
 import cv2
