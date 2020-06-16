@@ -26,6 +26,7 @@ Flow:
 
 ## Run:
 ```
+   For Version V11:
     -> cd v11
     -> python main.py --model_name "faster_rcnn_resnet50_coco_2018_01_28" --num_frames 60
 
@@ -33,5 +34,9 @@ Flow:
     -> python main.py --model_name 'ssd_mobilenet_v1_fpn_shared_box_predictor_640x640_coco14_sync_2018_07_03' 
         --num_frames 15 
     -> python main.py --model_name 'ssd_mobilenet_v1_coco_2018_01_28' --num_frames 15
+    
+    For Version V1.0
+    -> cd v1.0
+    -> python main.py --modeldir coco_ssd_mobilenet_v1_1
 ```
 
