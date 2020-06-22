@@ -39,4 +39,20 @@ Flow:
     -> cd v1.0
     -> python main.py --modeldir coco_ssd_mobilenet_v1_1
 ```
+## References:
 
+```
+1. Detection:
+    1. Object detection using pre-trained detectors:  https://github.com/tensorflow/models/tree/master/research/object_detection
+    2. For tflite model: https://www.tensorflow.org/lite/models/object_detection/overview
+2. Tracking:
+    1. Dlib tracker: Danelljan, Martin, et al. "Accurate scale estimation for robust visual tracking." Proceedings of the British Machine Vision Conference BMVC. 2014.
+    2. Implementation: https://www.pyimagesearch.com/2018/10/29/multi-object-tracking-with-dlib/
+3. Perspective Transform:
+    1. Explanation and Implementation: https://www.learnopencv.com/homography-examples-using-opencv-python-c/
+    2. Implementation: https://stackoverflow.com/questions/57439977/transforming-perspective-view-to-a-top-view
+    3. Implementation: https://www.pyimagesearch.com/2014/08/25/4-point-opencv-getperspective-transform-example/
+4. Social distancing detection:
+    1. Landing AI: https://landing.ai/landing-ai-creates-an-ai-tool-to-help-customers-monitor-social-distancing-in-the-workplace/
+    2. Aqeel Anwar : https://towardsdatascience.com/monitoring-social-distancing-using-ai-c5b81da44c9f
+```
