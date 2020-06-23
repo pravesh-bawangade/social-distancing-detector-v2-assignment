@@ -30,6 +30,7 @@ class SocialDistancing:
         self.resW, self.resH = resolution.split('x')
         self.imW, self.imH = int(self.resW), int(self.resH)
 
+        #
         self.x_dist_thresh = 200
         self.dist_thres = 20
 
@@ -38,7 +39,7 @@ class SocialDistancing:
         ret = self.videostream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
         ret = self.videostream.set(3, self.imW)
         ret = self.videostream.set(4, self.imH)
-        ret = self.videostream.set(cv2.CAP_PROP_FPS, 10)
+        # ret = self.videostream.set(cv2.CAP_PROP_FPS, 10)
 
         # Initialize frame rate calculation
         self.frame_rate_calc = 1

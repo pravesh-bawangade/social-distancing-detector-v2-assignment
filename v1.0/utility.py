@@ -73,8 +73,7 @@ def display_bbox(frame, inputQueues, outputQueues, rgb,
             bottom_cord.append((x_mid, y_mid))
             cv2.circle(frame, (int(x_mid), int(y_mid)), radius=5, color=(255, 0, 0), thickness=-1)
 
-            # draw the bounding box from the correlation object
-            # tracker
+            # draw the bounding box
             cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (10, 255, 0), 2)
 
     return inputQueues, outputQueues, frame, np.array([bottom_cord], np.float32)

@@ -93,8 +93,7 @@ def display_bbox(frame, inputQueues, outputQueues, rgb,
             bottom_cord.append((x_mid, y_mid))
             cv2.circle(frame, (int(x_mid), int(y_mid)), radius=5, color=(255, 0, 0), thickness=-1)
 
-            # draw the bounding box from the correlation object
-            # tracker
+            # draw the bounding box
             cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (10, 255, 0), 2)
     if len(bottom_cord) == 0:
         flag = False
@@ -162,7 +161,7 @@ def distance_violation(bottom_cord_warped, d_thresh, Mat_inv):
     dist_condensed = pdist(p)
     dist = squareform(dist_condensed)
 
-    dd = np.where(dist < d_thresh )#* 6 / 10
+    dd = np.where(dist < d_thresh )
     close_p = []
     for i in range(int(np.ceil(len(dd[0]) / 2))):
         if dd[0][i] != dd[1][i]:
