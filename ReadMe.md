@@ -1,4 +1,4 @@
-# Social Distancing Detection Assignment - ORBO.AI
+# Social Distancing Detection.
 
 ## Description:
 ```
